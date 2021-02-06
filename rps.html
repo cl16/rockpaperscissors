@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<script>
+    function computerPlay() {
+        // return one random selection from Rock, Paper, or Scissors options
+        let selectionOptions = ["rock", "paper", "scissors"]
+        return selectionOptions[Math.floor(Math.random() * selectionOptions.length)];
+    }
+
+    function title(s) {return s.charAt(0).toUpperCase() + s.slice(1).toLowerCase()}
+
+    function playRound(playerSelection, computerSelection) {
+        
+        // change case to all lower (case insensitive)
+        playerSelection = playerSelection.toLowerCase();
+        computerSelection = computerSelection.toLowerCase();
+
+        // evaluate winner
+        if (playerSelection == "rock") {
+            if (computerSelection == "rock") {
+                // return a tie
+                return `Tie! ${title(playerSelection)} ties ${title(computerSelection)}!`
+            } 
+            else if (computerSelection == "scissors") {
+                // return a win
+                return `You win! ${title(playerSelection)} beats ${title(computerSelection)}!`
+            }
+            else if (computerSelection == "paper") {
+                // return a loss
+                return `You lose! ${title(computerSelection)} beats ${title(playerSelection)}!`
+            }
+            else {return "Input is not a valid move."}
+        }
+
+        else if (playerSelection == "paper") {
+            if (computerSelection == "paper") {}
+            else if (computerSelection == "rock") {
+                // return a win
+                return `You win! ${title(playerSelection)} beats ${title(computerSelection)}!`
+            }
+            else if (computerSelection == "scissors") {
+                // return a loss
+                return `You lose! ${title(computerSelection)} beats ${title(playerSelection)}!`
+            }
+            else {return "Input is not a valid move."}
+        }
+
+        else if (playerSelection == "scissors") {
+            if (computerSelection == "scissors") {}
+            else if (computerSelection == "paper") {
+                // return a win
+                return `You win! ${title(playerSelection)} beats ${title(computerSelection)}!`
+            }
+            else if (computerSelection == "rock") {
+                // return a loss
+                return `You lose! ${title(computerSelection)} beats ${title(playerSelection)}!`
+            }
+            else {return "Input is not a valid move."}
+        }
+    }
+
+    function game() {
+        // Play five rounds and keep score (best of 5)
+
+        let playerScore = 0;
+        let computerScore = 0;
+
+        for (let i = 0; i < 5; i++) {
+            // check if best-of-5 has been won, break if so:
+            if (playerScore == 3 | computerScore == 3) {break;}
+            
+            // get input from user, play a game, and tally winner
+            // if tie, repeat until winner
+            let playerSelection = None;
+            let possibleSelections = ["rock", "paper", "scissors"];
+            while (!possibleSelections.includes(playerSelection)) {
+                playerSelection = prompt("Please enter a selection (rock, paper, scissors)...");
+            }
+
+            let result = "tie";
+            while (result.includes("tie")) {
+                result = playRound(playerSelection, computerPlay());
+                console.log(result);
+            }
+
+            // check result to tally score:
+            if (result.includes("win")) {
+                playerScore += 1;
+            }
+            else if (result.includes("lose")) {
+                computerScore += 1;
+            }
+        }
+
+        // check for who has reached 3 wins:
+        if (playerScore == 3) {
+            console.log("You win the best-of-five!")
+        }
+        else if (computerScore == 3) {
+            console.log("The computer wins the best-of-five!")
+        }
+    }
+</script>
