@@ -32,7 +32,10 @@
         }
 
         else if (playerSelection == "paper") {
-            if (computerSelection == "paper") {}
+            if (computerSelection == "paper") {
+                // return a tie
+                return `Tie! ${title(playerSelection)} ties ${title(computerSelection)}!`
+            }
             else if (computerSelection == "rock") {
                 // return a win
                 return `You win! ${title(playerSelection)} beats ${title(computerSelection)}!`
@@ -70,17 +73,24 @@
             
             // get input from user, play a game, and tally winner
             // if tie, repeat until winner
-            let playerSelection = None;
+            let playerSelection = undefined;
             let possibleSelections = ["rock", "paper", "scissors"];
-            while (!possibleSelections.includes(playerSelection)) {
-                playerSelection = prompt("Please enter a selection (rock, paper, scissors)...");
-            }
+            
 
             let result = "tie";
             while (result.includes("tie")) {
+                result = undefined;
+                playerSelection = undefined;
+                while (!possibleSelections.includes(playerSelection)) {
+                        playerSelection = prompt("Please enter a selection (rock, paper, scissors)... Or enter 'quit' to quit.");
+                        if (playerSelection == "quit") {break;}
+                    }
+                if (playerSelection == "quit") {break;}
                 result = playRound(playerSelection, computerPlay());
                 console.log(result);
             }
+            
+            if (playerSelection == "quit") {break;}
 
             // check result to tally score:
             if (result.includes("win")) {
@@ -89,6 +99,8 @@
             else if (result.includes("lose")) {
                 computerScore += 1;
             }
+            
+            console.log(`Score: Player [${playerScore}] Computer [${computerScore}]`);
         }
 
         // check for who has reached 3 wins:
