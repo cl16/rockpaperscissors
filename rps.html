@@ -1,114 +1,25 @@
 <!DOCTYPE html>
-<script>
-    function computerPlay() {
-        // return one random selection from Rock, Paper, or Scissors options
-        let selectionOptions = ["rock", "paper", "scissors"]
-        return selectionOptions[Math.floor(Math.random() * selectionOptions.length)];
-    }
+<head>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="game-area">
+        <div id="game-status">
+            <div id="player-header" class="title">Player</div>
+            <div id="cpu-header" class="title">CPU</div>
+            <div id="player-score" class="score">0</div>
+            <div id="cpu-score" class="score">0</div>
 
-    function title(s) {return s.charAt(0).toUpperCase() + s.slice(1).toLowerCase()}
-
-    function playRound(playerSelection, computerSelection) {
-        
-        // change case to all lower (case insensitive)
-        playerSelection = playerSelection.toLowerCase();
-        computerSelection = computerSelection.toLowerCase();
-
-        // evaluate winner
-        if (playerSelection == "rock") {
-            if (computerSelection == "rock") {
-                // return a tie
-                return `Tie! ${title(playerSelection)} ties ${title(computerSelection)}!`
-            } 
-            else if (computerSelection == "scissors") {
-                // return a win
-                return `You win! ${title(playerSelection)} beats ${title(computerSelection)}!`
-            }
-            else if (computerSelection == "paper") {
-                // return a loss
-                return `You lose! ${title(computerSelection)} beats ${title(playerSelection)}!`
-            }
-            else {return "Input is not a valid move."}
-        }
-
-        else if (playerSelection == "paper") {
-            if (computerSelection == "paper") {
-                // return a tie
-                return `Tie! ${title(playerSelection)} ties ${title(computerSelection)}!`
-            }
-            else if (computerSelection == "rock") {
-                // return a win
-                return `You win! ${title(playerSelection)} beats ${title(computerSelection)}!`
-            }
-            else if (computerSelection == "scissors") {
-                // return a loss
-                return `You lose! ${title(computerSelection)} beats ${title(playerSelection)}!`
-            }
-            else {return "Input is not a valid move."}
-        }
-
-        else if (playerSelection == "scissors") {
-            if (computerSelection == "scissors") {}
-            else if (computerSelection == "paper") {
-                // return a win
-                return `You win! ${title(playerSelection)} beats ${title(computerSelection)}!`
-            }
-            else if (computerSelection == "rock") {
-                // return a loss
-                return `You lose! ${title(computerSelection)} beats ${title(playerSelection)}!`
-            }
-            else {return "Input is not a valid move."}
-        }
-    }
-
-    function game() {
-        // Play five rounds and keep score (best of 5)
-
-        let playerScore = 0;
-        let computerScore = 0;
-
-        for (let i = 0; i < 5; i++) {
-            // check if best-of-5 has been won, break if so:
-            if (playerScore == 3 | computerScore == 3) {break;}
-            
-            // get input from user, play a game, and tally winner
-            // if tie, repeat until winner
-            let playerSelection = undefined;
-            let possibleSelections = ["rock", "paper", "scissors"];
-            
-
-            let result = "tie";
-            while (result.includes("tie")) {
-                result = undefined;
-                playerSelection = undefined;
-                while (!possibleSelections.includes(playerSelection)) {
-                        playerSelection = prompt("Please enter a selection (rock, paper, scissors)... Or enter 'quit' to quit.");
-                        if (playerSelection == "quit") {break;}
-                    }
-                if (playerSelection == "quit") {break;}
-                result = playRound(playerSelection, computerPlay());
-                console.log(result);
-            }
-            
-            if (playerSelection == "quit") {break;}
-
-            // check result to tally score:
-            if (result.includes("win")) {
-                playerScore += 1;
-            }
-            else if (result.includes("lose")) {
-                computerScore += 1;
-            }
-            
-            console.log(`Score: Player [${playerScore}] Computer [${computerScore}]`);
-        }
-
-        // check for who has reached 3 wins:
-        if (playerScore == 3) {
-            console.log("You win the best-of-five!")
-        }
-        else if (computerScore == 3) {
-            console.log("The computer wins the best-of-five!")
-        }
-    }
-</script>
+        </div>
+        <div id="game-prompt">
+            <div id="message">Choose a move to start the game!</div>
+        </div>
+        <div id="button-area">
+            <button id="rock" class="move">Rock</button>
+            <button id="paper" class="move">Paper</button>
+            <button id="scissors" class="move">Scissors</button>
+            <button id="reset" class="reset">Start/Reset</button>
+        </div>
+    </div>
+</body>
+<script src="rps.js"></script>
