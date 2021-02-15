@@ -9,7 +9,9 @@ function computerPlay() {
     return selectionOptions[Math.floor(Math.random() * selectionOptions.length)];
 }
 
-function title(s) {return s.charAt(0).toUpperCase() + s.slice(1).toLowerCase()}
+function title(s) {
+    return s.charAt(0).toUpperCase() + s.slice(1).toLowerCase();
+}
 
 function playRound(playerSelection, computerSelection) {
     
@@ -67,11 +69,7 @@ function playRound(playerSelection, computerSelection) {
     }
 }
 
-
-
-
-
-// NEW STUFF:
+// To change the DOM:
 const messageField = document.querySelector('#message');
 
 function changeMessage (message) {
@@ -113,6 +111,7 @@ function resetGame() {
     changeMessage("Choose a move to start the game!");
 }
 
+// evaluate round and update DOM:
 function evaluate() {
 
     if (playerScore < 3 & computerScore < 3) {
